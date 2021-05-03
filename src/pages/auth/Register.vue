@@ -47,10 +47,13 @@
               outlined
               hide-bottom-space
               v-model="credentials.password"
-              label="Password"
+              label="Password（6文字以上）"
               type="password"
               lazy-rules
-              :rules="[val => !!val || '入力してください']"
+              :rules="[
+                val => !!val || '入力してください',
+                val => val.length >= 6 || '6文字以上にしてください'
+              ]"
             >
               <template v-slot:prepend>
                 <q-icon name="lock" />
@@ -92,7 +95,7 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Register',
   data () {
     return {
       credentials: {
@@ -101,7 +104,8 @@ export default {
         password: '',
         password_confirmation: ''
       },
-      loading: false
+      loading: false,
+      errors: {}
     }
   },
 
@@ -122,8 +126,10 @@ export default {
             this.$router.replace({ name: 'email.verify' })
             this.$q.notify({ type: 'positive', message: '成功しました' })
           })
-          .catch((e) => {
-            console.error(e)
+          .catch(error => {
+            if (error.response.status === 422) {
+              this.errors = error.response.data.errors
+            }
             this.$q.notify({ type: 'negative', message: '失敗しました' })
             this.loading = false
           })

@@ -32,7 +32,7 @@ export default {
 
   actions: {
     async register ({ dispatch }, creds) {
-      await dispatch('logout')
+      await axios.get('csrf-cookie')
       await axios.post('register', creds)
       await dispatch('user')
       await axios.post('email/verification-notification')

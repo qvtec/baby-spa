@@ -33,10 +33,13 @@
               outlined
               hide-bottom-space
               v-model="credentials.password"
-              label="Password"
+              label="Password（6文字以上）"
               type="password"
               lazy-rules
-              :rules="[val => !!val || '入力してください']"
+              :rules="[
+                val => !!val || '入力してください',
+                val => val.length >= 6 || '6文字以上にしてください'
+              ]"
             >
               <template v-slot:prepend>
                 <q-icon name="lock" />

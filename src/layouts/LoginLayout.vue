@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh Lpr fFf">
 
-    <q-header class="bg-primary">
+    <q-header>
       <q-toolbar>
         <q-toolbar-title>
           <q-btn flat size="lg" no-caps :to="{ name: 'top' }">

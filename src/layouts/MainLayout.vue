@@ -89,6 +89,7 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink.vue'
+import { Loading, LoadingBar } from 'quasar'
 
 const linksData = [
   {
@@ -129,7 +130,11 @@ export default {
 
   methods: {
     async logout () {
+      LoadingBar.start()
+      Loading.show()
       await this.$store.dispatch('auth/logout')
+      Loading.hide()
+      LoadingBar.stop()
       this.$router.replace({ name: 'login' })
     }
   }

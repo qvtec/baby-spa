@@ -2,7 +2,7 @@
   <q-page padding class="fit row justify-center q-pa-md items-baseline">
     <div class="col-xs-12 col-sm-7 col-lg-5">
       <q-card flat bordered>
-        <q-card-section class="bg-grey-2">
+        <q-card-section class="bg-secondary text-white">
           <div class="text-h6">ログイン</div>
         </q-card-section>
 
@@ -49,7 +49,7 @@
                 label="ログイン"
                 :loading="loading"
                 type="submit"
-                color="primary"
+                color="accent"
                 size="lg" />
             </div>
           </q-form>

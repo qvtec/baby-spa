@@ -13,8 +13,9 @@
             </div>
           </q-btn>
         </q-toolbar-title>
-        <q-separator dark vertical />
-        <q-btn stretch flat type="a" :to="{ name: 'login' }" label="ログイン" />
+
+        <q-btn v-if="this.$store.getters['auth/isAuth']" rounded color="accent" label="アカウント登録" :to="{ name: 'register' }" icon="person_add" />
+        <q-btn v-else rounded color="accent" label="ログイン" :to="{ name: 'login' }" icon="login" />
       </q-toolbar>
     </q-header>
 
