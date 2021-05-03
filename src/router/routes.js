@@ -13,7 +13,8 @@ const routes = [
     meta: { authRequired: false },
     children: [
       { path: 'login', name: 'login', component: () => import('pages/auth/Login') },
-      { path: 'register', name: 'register', component: () => import('pages/auth/Register') }
+      { path: 'register', name: 'register', component: () => import('pages/auth/Register') },
+      { path: 'test', name: 'test', component: () => import('pages/auth/Test') }
     ]
   },
   { // Password Routes
