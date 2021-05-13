@@ -15,6 +15,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
+    "blueimp-load-image": "^5.14.0",
     "core-js": "^3.6.5",
     "quasar": "^1.0.0"
   },

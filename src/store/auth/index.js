@@ -5,7 +5,8 @@ export default {
 
   state: {
     user: null,
-    isAuth: false
+    isAuth: false,
+    twoFactor: false
   },
 
   getters: {
@@ -15,6 +16,10 @@ export default {
 
     isAuth (state) {
       return state.isAuth
+    },
+
+    twoFactor (state) {
+      return state.twoFactor
     }
   },
 
@@ -27,6 +32,10 @@ export default {
     REMOVE_AUTH (state) {
       state.isAuth = false
       state.user = null
+    },
+
+    SET_TWO_FACTOR (state, value) {
+      state.twoFactor = value
     }
   },
 
@@ -38,9 +47,12 @@ export default {
       await axios.post('email/verification-notification')
     },
 
-    async login ({ dispatch }, creds) {
+    async login ({ dispatch, commit }, creds) {
       await axios.get('csrf-cookie')
       await axios.post('login', creds)
+        .then((response) => {
+          commit('SET_TWO_FACTOR', response.data.two_factor)
+        })
       await dispatch('user')
     },
 
@@ -50,10 +62,14 @@ export default {
       commit('REMOVE_AUTH')
     },
 
+    async remember ({ dispatch }, creds) {
+      await axios.get('csrf-cookie')
+      await dispatch('user')
+    },
+
     async user ({ commit }) {
       await axios.post('user')
         .then((response) => {
-          console.log(response.data)
           commit('SET_AUTH_USER', response.data.data)
         })
         .catch((error) => {

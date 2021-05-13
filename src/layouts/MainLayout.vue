@@ -16,12 +16,15 @@
     <q-drawer show-if-above v-model="left" side="left" content-class="bg-grey-3" bordered>
       <!-- drawer content -->
       <q-list>
-        <q-item>
+        <q-item v-if="user" :to="{ name: 'profile' }">
           <q-item-section avatar>
-            <q-icon name="accessibility_new" />
+            <q-avatar v-if="user.photo">
+              <q-img :src="user.photo" />
+            </q-avatar>
+            <q-icon v-else name="accessibility_new" />
           </q-item-section>
           <q-item-section>
-            {{ user }}
+            {{ user.name }}
           </q-item-section>
         </q-item>
 

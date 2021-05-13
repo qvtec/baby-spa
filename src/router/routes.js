@@ -14,6 +14,7 @@ const routes = [
     children: [
       { path: 'login', name: 'login', component: () => import('pages/auth/Login') },
       { path: 'register', name: 'register', component: () => import('pages/auth/Register') },
+      { path: 'twofactor', name: 'twofactor', component: () => import('pages/auth/TwoFactorChallenge') },
       { path: 'test', name: 'test', component: () => import('pages/auth/Test') }
     ]
   },
@@ -40,6 +41,7 @@ const routes = [
     meta: { authRequired: true },
     children: [
       { path: 'home', name: 'home', component: () => import('pages/user/Home') },
+      { path: 'profile', name: 'profile', component: () => import('pages/user/Profile') }
     ]
   },
 

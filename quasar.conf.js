@@ -65,7 +65,10 @@ module.exports = function (ctx) {
       env: {
         API_URL: ctx.dev
           ? 'http://server-test.local.com/api'
-          : 'https://server-test.' + process.env.DOMAIN + '/api'
+          : 'https://server-test.' + process.env.DOMAIN + '/api',
+        STORAGE: ctx.dev
+          ? 'http://server-test.local.com/storage-test/'
+          : 'https://server-test.' + process.env.DOMAIN + '/storage-test/'
       },
 
       // https://v1.quasar.dev/quasar-cli/handling-webpack
