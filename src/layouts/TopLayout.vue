@@ -14,8 +14,7 @@
           </q-btn>
         </q-toolbar-title>
 
-        <q-btn v-if="this.$store.getters['auth/isAuth']" rounded color="accent" label="アカウント登録" :to="{ name: 'register' }" icon="person_add" />
-        <q-btn v-else rounded color="accent" label="ログイン" :to="{ name: 'login' }" icon="login" />
+        <q-btn rounded color="accent" label="ログイン" :to="{ name: 'login' }" icon="login" />
       </q-toolbar>
     </q-header>
 
@@ -23,7 +22,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer bordered class="bg-white text-primary">
+    <q-footer reveal bordered class="bg-white text-primary">
       <q-toolbar>
         <q-toolbar-title>
           <strong>HOME</strong> App
