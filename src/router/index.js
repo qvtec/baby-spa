@@ -35,7 +35,7 @@ export default function ({ store }) {
       if (store.getters['auth/isAuth']) {
         next()
       } else {
-        store.dispatch('auth/user')
+        store.dispatch('auth/remember')
           .then(() => {
             next()
           })

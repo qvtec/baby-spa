@@ -43,6 +43,8 @@
               </template>
             </q-input>
 
+            <q-checkbox v-model="remember" label="ログイン状態を保持" />
+
             <div>
               <q-btn
                 class="full-width"
@@ -72,6 +74,7 @@ export default {
         email: '',
         password: ''
       },
+      remember: false,
       loading: false
     }
   },
@@ -88,12 +91,21 @@ export default {
         if (!success) return
         this.loading = true
 
+        if (this.remember) {
+          this.credentials.remember = true
+        }
+
         this.$store.dispatch('auth/login', this.credentials)
           .then(() => {
             this.$router.replace({ name: 'home' })
             this.$q.notify({ type: 'positive', message: 'ログインに成功しました' })
           })
           .catch(() => {
+            if (this.$store.getters['auth/twoFactor']) {
+              this.$router.replace({ name: 'twofactor' })
+              return
+            }
+
             this.$q.notify({ type: 'negative', message: 'ログインに失敗しました' })
             this.loading = false
           })
