@@ -113,45 +113,14 @@ export default {
         if (!success) return
         this.loading = true
 
-        const config = {
-          headers: { 'Content-Type': 'multipart/form-data' }
-        }
-        config.headers['X-HTTP-Method-Override'] = 'PUT';
-
-        const fd = new FormData()
-        fd.append('name', this.form.name)
-        fd.append('email', this.form.email)
-
-        const file = this.form.photo
-        loadImage.parseMetaData(file, (data) => {
-          const options = {
-            maxHeight: 1920,
-            maxWidth: 1920,
-            canvas: true
-          }
-
-          if (data.exif) {
-            options.orientation = data.exif.get('Orientation')
-          }
-
-          loadImage(file,
-            async (canvas) => {
-              const data = canvas.toDataURL(file.type)
-              const blob = this.base64ToBlob(data, file.type)
-              fd.append('photo', blob)
-
-              this.$axios.post('user/profile-information', fd, config)
-                .then(response => {
-                  this.$store.dispatch('auth/user')
-                  this.$q.notify({ type: 'positive', message: '更新完了しました' })
-                })
-                .finally(() => {
-                  this.loading = false
-                })
-            },
-            options
-          )
-        })
+        this.$axios.put('user/profile-information', this.form)
+          .then(response => {
+            this.$store.dispatch('auth/user')
+            this.$q.notify({ type: 'positive', message: '更新完了しました' })
+          })
+          .finally(() => {
+            this.loading = false
+          })
       })
     },
 
@@ -187,9 +156,29 @@ export default {
           const blob = this.base64ToBlob(data, file.type)
           const url = window.URL.createObjectURL(blob)
           this.uploadImage = url
+          this.savePhoto (blob)
         },
         options
       )
+    },
+
+    savePhoto (blob) {
+      const fd = new FormData()
+      fd.append('photo', blob)
+
+      const config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }
+      config.headers['X-HTTP-Method-Override'] = 'PUT';
+
+      this.$axios.post('user/profile-information', fd, config)
+        .then(response => {
+          this.$store.dispatch('auth/user')
+          this.$q.notify({ type: 'positive', message: '更新完了しました' })
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
 
     base64ToBlob (base64, fileType) {
