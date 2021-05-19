@@ -29,8 +29,8 @@ const routes = [
   },
   { // Email Verify
     path: '/email',
-    component: () => import('layouts/LoginLayout.vue'),
-    meta: { authRequired: true },
+    component: () => import('layouts/MainLayout.vue'),
+    meta: { authRequired: false },
     children: [
       { path: 'verify', name: 'email.verify', component: () => import('pages/auth/EmailVerify') }
     ]

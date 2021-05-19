@@ -27,26 +27,37 @@ export default function ({ store }) {
     base: process.env.VUE_ROUTER_BASE
   })
 
-  Router.beforeEach((to, from, next) => {
+  Router.beforeEach(async (to, from, next) => {
     LoadingBar.start()
 
     // Authenticate
     if (to.matched.some(route => route.meta.authRequired)) {
-      if (store.getters['auth/isAuth']) {
-        next()
-      } else {
-        store.dispatch('auth/remember')
-          .then(() => {
-            next()
-          })
-          .catch(() => {
-            LoadingBar.stop()
-            next({ name: 'login' })
-          })
+      if (!store.getters['auth/isAuth']) {
+        LoadingBar.stop()
+        next({ name: 'login' })
+        return
       }
-    } else {
-      next()
+
+      const user = store.getters['auth/user']
+      if (user && !user.email_verified_at) {
+        LoadingBar.stop()
+        next({ name: 'email.verify' })
+        return
+      }
     }
+
+    // Redirect If Authenticated
+    if(!to.path.indexOf('/auth') || !to.path.indexOf('/password')){
+      if (!store.getters['auth/user']) await store.dispatch('auth/user')
+
+      if (store.getters['auth/isAuth']) {
+        LoadingBar.stop()
+        next({ name: 'home' })
+        return
+      }
+    }
+
+    next()
   })
 
   Router.afterEach(() => {

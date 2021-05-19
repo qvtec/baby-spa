@@ -56,12 +56,6 @@ export default {
     }
   },
 
-  created () {
-    if (this.$store.getters['auth/isAuth']) {
-      this.$router.replace({ name: 'home' })
-    }
-  },
-
   methods: {
     login () {
       this.$refs.form.validate().then(success => {

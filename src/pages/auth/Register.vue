@@ -37,9 +37,16 @@
               type="email"
               lazy-rules
               :rules="[val => !!val || '入力してください']"
+              :error="!!errors.email && errors.email.length>0"
             >
               <template v-slot:prepend>
                 <q-icon name="mail" />
+              </template>
+
+              <template v-slot:error>
+                <div v-for="(error, key) in errors.email" :key="key">
+                  {{ error }}
+                </div>
               </template>
             </q-input>
 
@@ -106,12 +113,6 @@ export default {
       },
       loading: false,
       errors: {}
-    }
-  },
-
-  created () {
-    if (this.$store.getters['auth/isAuth']) {
-      this.$router.replace({ name: 'home' })
     }
   },
 

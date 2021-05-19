@@ -79,12 +79,6 @@ export default {
     }
   },
 
-  created () {
-    if (this.$store.getters['auth/isAuth']) {
-      this.$router.replace({ name: 'home' })
-    }
-  },
-
   methods: {
     login () {
       this.$refs.form.validate().then(success => {
@@ -100,9 +94,14 @@ export default {
             this.$router.replace({ name: 'home' })
             this.$q.notify({ type: 'positive', message: 'ログインに成功しました' })
           })
-          .catch(() => {
+          .catch((error) => {
             if (this.$store.getters['auth/twoFactor']) {
               this.$router.replace({ name: 'twofactor' })
+              return
+            }
+
+            if (error.response.status === 403) {
+              this.$router.replace({ name: 'email.verify' })
               return
             }
 

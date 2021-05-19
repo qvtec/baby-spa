@@ -40,19 +40,14 @@ export default {
   },
 
   actions: {
-    async register ({ dispatch }, creds) {
+    async register ({}, creds) {
       await axios.get('csrf-cookie')
       await axios.post('register', creds)
-      await dispatch('user')
-      await axios.post('email/verification-notification')
     },
 
-    async login ({ dispatch, commit }, creds) {
+    async login ({ dispatch }, creds) {
       await axios.get('csrf-cookie')
       await axios.post('login', creds)
-        .then((response) => {
-          commit('SET_TWO_FACTOR', response.data.two_factor)
-        })
       await dispatch('user')
     },
 
@@ -62,19 +57,13 @@ export default {
       commit('REMOVE_AUTH')
     },
 
-    async remember ({ dispatch }, creds) {
-      await axios.get('csrf-cookie')
-      await dispatch('user')
-    },
-
     async user ({ commit }) {
-      await axios.post('user')
+      await axios.get('user')
         .then((response) => {
           commit('SET_AUTH_USER', response.data.data)
         })
         .catch((error) => {
           commit('REMOVE_AUTH')
-          throw error
         })
     }
   }
