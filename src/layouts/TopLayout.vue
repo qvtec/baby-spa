@@ -9,7 +9,7 @@
               <img src="~assets/logo.png" />
             </q-avatar>
             <div v-if="$q.screen.gt.xs" class="q-pl-sm">
-              TEST APP
+              BABY APP
             </div>
           </q-btn>
         </q-toolbar-title>

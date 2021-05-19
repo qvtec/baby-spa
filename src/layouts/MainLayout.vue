@@ -7,7 +7,7 @@
 
         <q-toolbar-title>
           <q-btn flat size="lg" no-caps :to="{ name: 'top' }">
-            TEST APP
+            BABY APP
           </q-btn>
         </q-toolbar-title>
       </q-toolbar>

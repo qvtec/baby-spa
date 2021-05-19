@@ -64,11 +64,11 @@ module.exports = function (ctx) {
       // extractCSS: false,
       env: {
         API_URL: ctx.dev
-          ? 'http://server-test.local.com/api'
-          : 'https://server-test.' + process.env.DOMAIN + '/api',
+          ? 'http://server-baby.local.com/api'
+          : 'https://server-baby.' + process.env.DOMAIN + '/api',
         STORAGE: ctx.dev
-          ? 'http://server-test.local.com/storage-test/'
-          : 'https://server-test.' + process.env.DOMAIN + '/storage-test/'
+          ? 'http://server-baby.local.com/storage-baby/'
+          : 'https://server-baby.' + process.env.DOMAIN + '/storage-baby/'
       },
 
       // https://v1.quasar.dev/quasar-cli/handling-webpack
@@ -90,7 +90,7 @@ module.exports = function (ctx) {
         poll: 1000
       },
       proxy: {
-          '*': 'http://test.local.com'
+          '*': 'http://baby.local.com:3000'
       }
     },
 
@@ -142,9 +142,9 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Test App`,
-        short_name: `Test App`,
-        description: `A Test App`,
+        name: `Baby App`,
+        short_name: `Baby App`,
+        description: `A Baby App`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -209,7 +209,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'test-app'
+        appId: 'baby-app'
       },
 
       // More info: https://v1.quasar.dev/quasar-cli/developing-electron-apps/node-integration

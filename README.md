@@ -1,6 +1,6 @@
-# Test App (test-app)
+# Baby App (baby-app)
 
-A Test App
+A Baby App
 
 ## Install the dependencies
 ```bash

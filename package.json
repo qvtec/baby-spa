@@ -1,8 +1,8 @@
 {
-  "name": "test-app",
+  "name": "baby-app",
   "version": "0.0.1",
-  "description": "A Test App",
-  "productName": "Test App",
+  "description": "A Baby App",
+  "productName": "Baby App",
   "author": "qvtec <qvtec3@gmail.com>",
   "private": true,
   "scripts": {
