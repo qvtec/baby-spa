@@ -114,7 +114,7 @@ export default {
         this.loading = true
 
         this.$axios.put('user/profile-information', this.form)
-          .then(response => {
+          .then(() => {
             this.$store.dispatch('auth/user')
             this.$q.notify({ type: 'positive', message: '更新完了しました' })
           })
@@ -172,7 +172,7 @@ export default {
       config.headers['X-HTTP-Method-Override'] = 'PUT';
 
       this.$axios.post('user/profile-information', fd, config)
-        .then(response => {
+        .then(() => {
           this.$store.dispatch('auth/user')
           this.$q.notify({ type: 'positive', message: '更新完了しました' })
         })

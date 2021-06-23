@@ -38,8 +38,10 @@ export default function ({ store }) {
         return
       }
 
+      // emailVerify
       const user = store.getters['auth/user']
-      if (user && !user.email_verified_at) {
+      if (user && !user.email_verified_at)
+      {
         LoadingBar.stop()
         next({ name: 'email.verify' })
         return
@@ -47,7 +49,8 @@ export default function ({ store }) {
     }
 
     // Redirect If Authenticated
-    if(!to.path.indexOf('/auth') || !to.path.indexOf('/password')){
+    if(!to.path.indexOf('/auth') || !to.path.indexOf('/password'))
+    {
       if (!store.getters['auth/user']) await store.dispatch('auth/user')
 
       if (store.getters['auth/isAuth']) {

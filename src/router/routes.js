@@ -4,7 +4,9 @@ const routes = [
     component: () => import('layouts/TopLayout.vue'),
     meta: { authRequired: false },
     children: [
-      { path: '', name: 'top', component: () => import('pages/Index.vue') }
+      { path: '', name: 'top', component: () => import('pages/Index.vue') },
+      { path: 'privacy', name: 'privacy', component: () => import('pages/common/Privacy.vue') },
+      { path: 'terms', name: 'terms', component: () => import('pages/common/Terms.vue') }
     ]
   },
   { // Auth Routes

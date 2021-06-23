@@ -32,9 +32,8 @@
       </q-toolbar>
       <q-toolbar>
         <div class="text-center q-gutter-xs">
-          <q-btn flat size="sm" label="サイトポリシー" />
-          <q-btn flat size="sm" label="利用規約" />
-          <q-btn flat size="sm" label="プライバシーポリシー" />
+          <q-btn to="/terms" flat size="sm" label="利用規約" />
+          <q-btn to="/privacy" flat size="sm" label="プライバシーポリシー" />
         </div>
       </q-toolbar>
       <q-toolbar>

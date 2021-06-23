@@ -58,12 +58,17 @@ export default {
     },
 
     async user ({ commit }) {
-      await axios.get('user')
-        .then((response) => {
-          commit('SET_AUTH_USER', response.data.data)
+      await axios.get('me')
+        .then(response => {
+          if (!response.data) {
+            commit('REMOVE_AUTH')
+            return
+          }
+          commit('SET_AUTH_USER', response.data)
         })
-        .catch((error) => {
+        .catch(error => {
           commit('REMOVE_AUTH')
+          throw error
         })
     }
   }

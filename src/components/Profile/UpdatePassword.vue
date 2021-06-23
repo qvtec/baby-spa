@@ -103,7 +103,7 @@ export default {
         this.loading = true
 
         this.$axios.put('user/password', this.credentials)
-            .then(response => {
+            .then(() => {
               this.$q.notify({ type: 'positive', message: '更新完了しました' })
               this.credentialsp.current_password = ''
               this.credentialsp.password = ''
