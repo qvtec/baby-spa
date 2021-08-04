@@ -64,10 +64,10 @@ module.exports = function (ctx) {
       // extractCSS: false,
       env: {
         API_URL: ctx.dev
-          ? 'http://server-baby.local.com/api'
+          ? 'https://server-baby.local.com/api'
           : 'https://server-baby.' + process.env.DOMAIN + '/api',
         STORAGE: ctx.dev
-          ? 'http://server-baby.local.com/storage-baby/'
+          ? 'https://server-baby.local.com/storage-baby/'
           : 'https://server-baby.' + process.env.DOMAIN + '/storage-baby/'
       },
 
@@ -81,17 +81,10 @@ module.exports = function (ctx) {
 
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      https: false,
-      host: '0.0.0.0',
+      https: true,
+      host: 'baby.local.com',
       port: 3000,
-      open: false, // opens browser window automatically
-      allowedHosts: ['.local.com'],
-      watchOptions: {
-        poll: 1000
-      },
-      proxy: {
-          '*': 'http://baby.local.com:3000'
-      }
+      open: true, // opens browser window automatically
     },
 
     // https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework

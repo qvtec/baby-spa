@@ -165,6 +165,8 @@ export default {
     savePhoto (blob) {
       const fd = new FormData()
       fd.append('photo', blob)
+      fd.append('name', this.form.name)
+      fd.append('email', this.form.email)
 
       const config = {
         headers: { 'Content-Type': 'multipart/form-data' }

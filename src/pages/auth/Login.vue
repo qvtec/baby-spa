@@ -91,15 +91,17 @@ export default {
 
         this.$store.dispatch('auth/login', this.credentials)
           .then(() => {
+            if (!this.$store.getters['auth/isAuth']) {
+              if (this.$store.getters['auth/twoFactor']) {
+                this.$router.replace({ name: 'twofactor' })
+                return
+              }
+            }
+
             this.$router.replace({ name: 'home' })
             this.$q.notify({ type: 'positive', message: 'ログインに成功しました' })
           })
           .catch((error) => {
-            if (this.$store.getters['auth/twoFactor']) {
-              this.$router.replace({ name: 'twofactor' })
-              return
-            }
-
             if (error.response.status === 403) {
               this.$router.replace({ name: 'email.verify' })
               return
